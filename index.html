@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Weather app">
+    <meta name="keywords" content="weather, city, forecast">
+    <meta name="author" content="Yuri Franken">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Font -->
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <title>Weather app</title>
+</head>
+<body>
+<!-- Header -->
+<header>
+    <h1 class="text-center my-4">WEATHER APP</h1>
+</header>
+
+<!-- Main -->
+<main>
+    <section class="text-center">
+        <label for="city">Choose city:</label><br>
+        <input type="text" id="city" name="city"><br><br>
+        <input id="button" type="button" value="Request">
+    </section>
+    <section class="text-center my-4">
+        <h2>5-day weather forecast</h2>
+        <h2 id="cityName"></h2>
+    </section>
+    <template id="tpl-weather">
+        <section class="row">
+            <div>
+                <p class="weekDay"></p>
+                <p class="dayTemp"></p>
+            </div>
+            <div>
+                <p class="weekDay"></p>
+                <p class="dayTemp"></p>
+            </div>
+            <div>
+                <p class="weekDay"></p>
+                <p class="dayTemp"></p>
+            </div>
+            <div>
+                <p class="weekDay"></p>
+                <p class="dayTemp"></p>
+            </div>
+            <div>
+                <p class="weekDay"></p>
+                <p class="dayTemp"></p>
+            </div>
+        </section>
+    </template>
+    <section id="target" class="text-center"></section>
+</main>
+
+<!-- Footer -->
+<footer class="mt-3">
+    <p class="text-center p-3 mb-0">2020 &copy; Yuri Franken</p>
+</footer>
+
+<!-- Script -->
+<script src="script.js"></script>
+</body>
+</html>
