@@ -20,44 +20,20 @@
 <body>
 <!-- Header -->
 <header>
-    <h1 class="text-center my-4">WEATHER APP</h1>
+    <h1 class="text-center my-4 p-4">WEATHER APP</h1>
 </header>
 
 <!-- Main -->
 <main>
     <section class="text-center">
-        <label for="city">Choose city:</label><br>
-        <input type="text" id="city" name="city"><br><br>
-        <input id="button" type="button" value="Request">
+        <label id="choose" for="city">Choose city:</label><br>
+        <input type="text" id="city" class="p-1" name="city">
+        <input id="button" class="px-3 py-1 ml-2" type="button" value="GO">
     </section>
     <section class="text-center my-4">
         <h2>5-day weather forecast</h2>
         <h2 id="cityName"></h2>
     </section>
-    <template id="tpl-weather">
-        <section class="row">
-            <div>
-                <p class="weekDay"></p>
-                <p class="dayTemp"></p>
-            </div>
-            <div>
-                <p class="weekDay"></p>
-                <p class="dayTemp"></p>
-            </div>
-            <div>
-                <p class="weekDay"></p>
-                <p class="dayTemp"></p>
-            </div>
-            <div>
-                <p class="weekDay"></p>
-                <p class="dayTemp"></p>
-            </div>
-            <div>
-                <p class="weekDay"></p>
-                <p class="dayTemp"></p>
-            </div>
-        </section>
-    </template>
     <section id="target" class="text-center"></section>
 </main>
 

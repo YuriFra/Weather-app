@@ -15,20 +15,21 @@ Creating a weather app with AJAX api
     Learn to aggregate data fetched from an api
 
 ### Exercise
-* Sprint 1
 
-    create an account on this platform
-    You are going to have to generate a key.
-    create a home page where you ask the visitor to enter the city of his choice.
+**Sprint 1**
 
-* Sprint 2
+* Create an account on [this platform](https://openweathermap.org/).
+* You are going to have to generate a key.
+* Create a home page where you ask the visitor to enter the city of his choice.
 
-    Get the weather data using axios or another javascript AJAX enabled library or use the native JS fetch() method
-    Optional: Use a cdn link to link axios to your project.
-    Display the weather for the next 5 days.
-    Apply styling to your project using media queries to make it responsive.
+**Sprint 2**
 
-* Extra challenges
+* Get the weather data using axios or another javascript AJAX enabled library or use the native JS fetch() method
+* Optional: Use a cdn link to link axios to your project.
+* Display the weather for the next 5 days.
+* Apply styling to your project using media queries to make it responsive.
 
-    Use the API of https://unsplash.com/ to show a photo of the city they entered in the form.
-    Use a graph library like Google Graphs to show a line graph of the temperature over time.
+**Extra challenges**
+
+* Use the API of https://unsplash.com/ to show a photo of the city they entered in the form.
+* Use a graph library like Google Graphs to show a line graph of the temperature over time.
