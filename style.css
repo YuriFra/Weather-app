@@ -21,6 +21,10 @@ body, html {
         text-align: center;
         padding-left: 0;
     }
+    #cityImg {
+        width: 270px;
+        height: 182px;
+    }
     #target {
         min-height: 180px;
         background-size: 200px 151px;
@@ -38,6 +42,10 @@ body, html {
 @media only screen and (min-width: 769px){
     h1 {
         font-size: 4rem;
+    }
+    #cityImg {
+        width: 400px;
+        height: 270px;
     }
     #cityCard {
         width: 400px;
@@ -92,11 +100,14 @@ h1 {
 .fa-search:active {
     transform: scale(0.8);
 }
+#cityImg {
+    border-radius: 10px 10px 0 0;
+}
 #cityCard {
     padding-top: 10px;
-    margin: 20px auto;
+    margin: 0 auto;
     background-color: #262fc6;
-    border-radius: 10px;
+    border-radius: 0 0 10px 10px;
     box-shadow: 0 30px 35px -25px #080c21;
 }
 #target {

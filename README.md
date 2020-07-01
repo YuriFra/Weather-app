@@ -1,6 +1,8 @@
 # Weather-app
 Creating a weather app with AJAX api
 
+[Check out my page](https://yurifra.github.io/Weather-app/)
+
 ### Practical Information
 
     Repository: ajax-weather-api

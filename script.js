@@ -8,7 +8,6 @@ document.getElementById('button').addEventListener('click', () => {
             document.querySelector('#cityName').innerHTML = `<div id="cityCard"><h2>${data.city.name}</h2></div>`;
             // check how many times today is present & push all temperatures to descriptsPerDayions
             let list = data.list;
-            console.log(list);
             let today = new Date().toISOString().substring(0, 10);
             let dateSlice = [];
             let allTemps = [];
@@ -89,10 +88,17 @@ document.getElementById('button').addEventListener('click', () => {
                         </div>
                         <img class="icon" src="https://openweathermap.org/img/w/${iconsPerDay[i]}.png" alt="weatherIcon">
                      </div>`;
-                console.log(count, weekDay, tempWeekDay);
             }
-            console.log(avgTemperatures);
             document.getElementById('input').value = '';
+        })
+        .catch(error => console.error(error));
+
+    // fetch for an image per city query
+    fetch(`https://api.unsplash.com/photos/random?query=${city}&client_id=IA-TbCGliQ1uhgqew4rtI6iBD-Supv1X6K57f1PnjrM`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('imgContainer').innerHTML = "";
+            document.getElementById('imgContainer').innerHTML += `<img id="cityImg" class="img d-block mx-auto" src="${data.urls.thumb}" alt="cityImg">`;
         })
         .catch(error => console.error(error));
 });
