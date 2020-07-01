@@ -1,15 +1,19 @@
 document.getElementById('button').addEventListener('click', () => {
-    let city = document.getElementById('city').value;
+    let city = document.getElementById('input').value;
     fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=9d46464b30016d545a2dbfa1a930b13b`)
         .then(response => response.json())
         .then(data => {
-            document.querySelector('#cityName').innerHTML = data.city.name;
-            console.log(data);
-            // check how many times day1 is present & push all temps to array
+            const MAX_DAYS = 5;
+            document.getElementById('target').innerHTML = "";
+            document.querySelector('#cityName').innerHTML = `<div id="cityCard"><h2>${data.city.name}</h2></div>`;
+            // check how many times today is present & push all temperatures to descriptsPerDayions
             let list = data.list;
+            console.log(list);
             let today = new Date().toISOString().substring(0, 10);
             let dateSlice = [];
-            let allTemp = [];
+            let allTemps = [];
+            let allDescs = [];
+            let allIcons = [];
             let count = 0;
             for (let i = 0; i < list.length; i++) {
                 let dateTxt = list[i].dt_txt;
@@ -17,43 +21,78 @@ document.getElementById('button').addEventListener('click', () => {
                 if (today === dateSlice[i]) {
                     count++;
                 }
-                allTemp.push(list[i].main.temp);
+                allTemps.push(list[i].main.temp);
+                allDescs.push(list[i].weather[0].description);
+                allIcons.push(list[i].weather[0].icon);
             }
 
-            // slice the temp of each day out of the array
-            let temp1 = allTemp.slice(0, count);
-            let temp2 = allTemp.slice(count, count + 8);
-            let temp3 = allTemp.slice(count + 8, count + 16);
-            let temp4 = allTemp.slice(count + 16, count + 24);
-            let temp5 = allTemp.slice(count + 24, count + 32);
-            console.log(temp1, temp2, temp3, temp4, temp5);
+            // slice the temperatures of each day out of the descriptsPerDayions
+            let days = [];
+            let descriptions = [];
+            let icons = [];
+            for (let i = 0; i < MAX_DAYS; i++) {
+                let start = (i === 0) ? 0 : count + (8 * (i-1));
+                days.push(allTemps.slice(start, count + (8 * i)));
+                descriptions.push(allDescs.slice(start, count + (8 * i)));
+                icons.push(allIcons.slice(start, count + (8 * i)));
+            }
 
-            //calculate average temp, rounded
-            let avgTemp = [];
-            const avgArr = array => (array.reduce((a, b) => a + b) / array.length).toFixed(1);
-            let avgTemp1 = avgArr(temp1);
-            let avgTemp2 = avgArr(temp2);
-            let avgTemp3 = avgArr(temp3);
-            let avgTemp4 = avgArr(temp4);
-            let avgTemp5 = avgArr(temp5);
-            avgTemp.push(avgTemp2, avgTemp3, avgTemp4, avgTemp5);
-            console.log(avgTemp1, avgTemp2, avgTemp3, avgTemp4, avgTemp5);
+            //calculate average temperature, rounded
+            let avgTemperatures = [];
+            const calculateAverage = array => (array.reduce((a, b) => a + b) / array.length).toFixed(1);
+            days.forEach((day) => {
+                avgTemperatures.push(calculateAverage(day));
+            });
 
-            // calculate weekdays
-            let currentDay = new Date().toDateString();
-            document.getElementById('target').innerHTML = `<h4>${currentDay}</h4><div>${avgTemp1} °C</div>`;
-            let nextDay;
-            let tempNextDay;
-            console.log(currentDay);
-            for (let i = 0; i < 4; i++) {
-                nextDay = new Date(list[count].dt_txt).toDateString();
+            // check for most occurring value
+            function occurrence(array) {
+                if(array.length === 0) return null;
+                let occurrenceMap = {};
+                let maxEl = array[0], maxCount = 1;
+                for(let i = 0; i < array.length; i++) {
+                    let el = array[i];
+                    if(occurrenceMap[el] == null)
+                        occurrenceMap[el] = 1;
+                    else
+                        occurrenceMap[el]++;
+                    if(occurrenceMap[el] > maxCount) {
+                        maxEl = el;
+                        maxCount = occurrenceMap[el];
+                    }
+                }
+                return maxEl;
+            }
+
+            // push most occurring values per day into array
+            let descriptsPerDay = [];
+            let iconsPerDay = [];
+            descriptions.forEach(array => {
+                descriptsPerDay.push(occurrence(array));
+            })
+            icons.forEach(array => {
+                iconsPerDay.push(occurrence(array));
+            })
+            console.log(descriptsPerDay);
+            // define weekdays
+            let weekDay;
+            let tempWeekDay;
+            for (let i = 0; i < MAX_DAYS; i++) {
+                weekDay = new Date(list[count-1].dt_txt).toDateString();
                 count += 8;
-                tempNextDay = avgTemp[i];
-                document.getElementById('target').innerHTML += `<br><h4>${nextDay}</h4><div>${tempNextDay} °C</div>`;
-                console.log(count, nextDay, tempNextDay);
+                tempWeekDay = avgTemperatures[i];
+                document.getElementById('target').innerHTML +=
+                    `<div class="card">
+                        <div class="txt">
+                          <div class="day">${weekDay}</div>
+                          <div class="description">${descriptsPerDay[i]}</div>
+                          <div class="temp">${tempWeekDay}°C</div>
+                        </div>
+                        <img class="icon" src="https://openweathermap.org/img/w/${iconsPerDay[i]}.png" alt="weatherIcon">
+                     </div>`;
+                console.log(count, weekDay, tempWeekDay);
             }
-
+            console.log(avgTemperatures);
+            document.getElementById('input').value = '';
         })
         .catch(error => console.error(error));
-})
-
+});
