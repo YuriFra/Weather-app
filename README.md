@@ -7,7 +7,7 @@ Creating a weather app with AJAX api
 
     Repository: ajax-weather-api
     Deadline: 3 days
-    Delivery: Github page (published)
+    Delivery: Github page
     Team: Solo
 
 ### Learning Objectives
@@ -30,8 +30,6 @@ Creating a weather app with AJAX api
 * Optional: Use a cdn link to link axios to your project.
 * Display the weather for the next 5 days.
 * Apply styling to your project using media queries to make it responsive.
+* Use the API of https://unsplash.com/ to show a photo of the city entered in the form.
 
-**Extra challenges**
-
-* Use the API of https://unsplash.com/ to show a photo of the city they entered in the form.
-* Use a graph library like Google Graphs to show a line graph of the temperature over time.
+![weather](weather.png)
